@@ -3,16 +3,24 @@ import joblib
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import warnings
+warnings.filterwarnings("ignore")
 
-# Load the trained RandomForest model 
-model = joblib.load(os.path.join("outputs", "random_forest_model.pkl"))
+# Loading the trained XGBoost model
+model = joblib.load(os.path.join("outputs", "xgb_model.pkl"))
 
-# Define prediction function
+# Defining the prediction function
 def predict_energy(region, hour, dayofweek, quarter, month, year,
                    dayofyear, dayofmonth, weekofyear, is_holiday):
 
-    # Prepare the input data as a pandas DataFrame
+    PJME_MW = 0  
+    
+    if region == "PJME":
+        PJME_MW = 1000 
+    
+    # input data
     input_df = pd.DataFrame({
+        "PJME_MW": [PJME_MW],  
         "hour": [hour],
         "dayofweek": [dayofweek],
         "quarter": [quarter],
@@ -23,27 +31,28 @@ def predict_energy(region, hour, dayofweek, quarter, month, year,
         "weekofyear": [weekofyear],
         "is_holiday": [1 if is_holiday else 0]
     })
-
-    # Make the prediction
+    
+    # making the prediction
     prediction = model.predict(input_df)[0]
 
-    # Forecast for the next 24 hours
+    # Forecasting for next 24 hours (using the same features for forecasting)
     hours = list(range(24))
     forecast_input = pd.DataFrame({
+        "PJME_MW": [PJME_MW] * 24, 
         "hour": hours,
-        "dayofweek": [dayofweek]*24,
-        "quarter": [quarter]*24,
-        "month": [month]*24,
-        "year": [year]*24,
-        "dayofyear": [dayofyear]*24,
-        "dayofmonth": [dayofmonth]*24,
-        "weekofyear": [weekofyear]*24,
-        "is_holiday": [1 if is_holiday else 0]*24
+        "dayofweek": [dayofweek] * 24,
+        "quarter": [quarter] * 24,
+        "month": [month] * 24,
+        "year": [year] * 24,
+        "dayofyear": [dayofyear] * 24,
+        "dayofmonth": [dayofmonth] * 24,
+        "weekofyear": [weekofyear] * 24,
+        "is_holiday": [1 if is_holiday else 0] * 24
     })
-
+    
     forecast = model.predict(forecast_input)
 
-    # Plot forecast for the next 24 hours
+    # Ploting the forecast
     fig, ax = plt.subplots()
     ax.plot(hours, forecast, marker='o')
     ax.set_title(f"24-Hour Forecast: {region}")
@@ -53,9 +62,8 @@ def predict_energy(region, hour, dayofweek, quarter, month, year,
 
     return round(prediction, 2), fig
 
-# Define the UI components
 inputs = [
-    gr.Radio(["PJME", "PJMW"], label="Region"),
+    #gr.Radio(["PJME"], label="Region"),
     gr.Slider(0, 23, step=1, label="Hour"),
     gr.Slider(0, 6, step=1, label="Day of Week (0=Mon)"),
     gr.Slider(1, 4, step=1, label="Quarter"),
@@ -67,14 +75,15 @@ inputs = [
     gr.Checkbox(label="Is Holiday")
 ]
 
-# Set up the Gradio interface
+
 iface = gr.Interface(
     fn=predict_energy,
     inputs=inputs,
     outputs=["number", "plot"],
-    title="⚡ Energy Forecasting System",
-    description="Forecasts hourly energy consumption using Random Forest. Trained on hourly data from PJME and PJMW."
-)
+    title="⚡ Energy Consumption Forecasting System",
+    description="Forecasts hourly energy consumption using XGBoost. Trained on hourly data from PJME and PJMW.",
+    theme="huggingface",     
+    live=True,            
+    allow_flagging="never")
 
-# Launch the interface
 iface.launch()
