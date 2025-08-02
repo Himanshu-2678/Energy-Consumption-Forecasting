@@ -26,37 +26,6 @@ This is actually my first Machine Learning Project which i made from Scratch for
   - `scikit-learn` (for ML model building and evaluation)
   - `xgboost` (for the model)
 
-## Project Structure
-Energy_Forecasting_System/
-│
-├── data/                           ← Raw and cleaned CSV data files
-│   ├── raw_data.csv                ← Raw energy consumption data (PJM)
-│   └── cleaned_data.csv            ← Cleaned and preprocessed data for training
-│
-├── notebooks/                      ← Jupyter Notebooks for experimentation and EDA
-│   ├── 1-data_cleaning.ipynb       ← Data cleaning and preprocessing
-│   ├── 2-data_visualizations.ipynb ← Exploratory data analysis (EDA) and visualizations
-│   ├── 3-feature_engineering.ipynb ← Feature engineering process
-│   └── 4-model_building.ipynb      ← Model building and evaluation
-│
-├── src/                            ← Source code for data processing, model training, and evaluation
-│   ├── preprocessing.py            ← Data cleaning and feature engineering functions
-│   ├── model_train.py              ← Model training, hyperparameter tuning, and saving the model
-│   ├── evaluate.py                 ← Metrics, plots, and model evaluation
-│   ├── data_preprocessing.py      ← Helper functions for data preprocessing
-│   ├── model_evaluation.py        ← Functions to evaluate model performance and generate plots
-│   ├── feature_engineering.py     ← Feature extraction and transformation
-│   ├── model_training.py          ← Model training pipeline and hyperparameter tuning
-│   ├── model_utils.py             ← Helper functions for model management
-│   └── predictions.py             ← Predictive pipeline and output generation
-│             
-│
-├── outputs/                        ← Output files such as predictions and forecasts
-│   └── xgb_model.pkl            ← Forecasted values for future energy consumption
-│
-├── main.py                         ← Main driver script to start the application and deploy the model
-├── requirements.txt                ← List of dependencies
-└── README.md                       ← Project documentation (this file)
 
 
 
