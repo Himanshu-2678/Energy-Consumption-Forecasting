@@ -35,5 +35,6 @@ To run the **Energy Forecasting System** locally, follow these steps:
    git clone https://github.com/yourusername/Energy_Forecasting_System.git
    cd Energy_Forecasting_System
 3. Run the app -> 
-   ```python src/7-app.py
-   ```
+   ```bash
+   python src/7-app.py
+   
