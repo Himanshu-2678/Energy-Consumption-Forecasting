@@ -1,8 +1,6 @@
 ## feature engineering
 def create_features(df):
-    """
-    Create time series features based on time series index.
-    """
+    
     df = df.copy()
     df['hour'] = df.index.hour
     df['dayofweek'] = df.index.dayofweek
