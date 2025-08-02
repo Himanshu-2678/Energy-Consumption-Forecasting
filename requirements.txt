@@ -1,4 +1,5 @@
-pyarrow
-cython
-fbprophet
-statsmodels
+gradio
+numpy
+pandas
+matplot.pyplot
+seaborn
