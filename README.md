@@ -27,6 +27,9 @@ This is my first Machine Learning project created from scratch, aimed at upskill
   - `xgboost` (for training the model)
   - `numpy` (for numerical computations)
 
+## Screenshot of project
+![Screenshot](C:\Users\himan\Pictures\Screenshots)
+
 ## Installation & Setup
 To run the **Energy Forecasting System** locally, follow these steps:
 
