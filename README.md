@@ -26,9 +26,7 @@ This is my first Machine Learning project created from scratch, aimed at upskill
   - `scikit-learn` (for model building and evaluation)
   - `xgboost` (for training the model)
   - `numpy` (for numerical computations)
-
-## Screenshot of project
-![Screenshot](assets/screenshot.png)
+)
 
 ## Installation & Setup
 To run the **Energy Forecasting System** locally, follow these steps:
