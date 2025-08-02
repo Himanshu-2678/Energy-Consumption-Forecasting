@@ -28,7 +28,7 @@ This is my first Machine Learning project created from scratch, aimed at upskill
   - `numpy` (for numerical computations)
 
 ## Screenshot of project
-![Screenshot](C:\Users\himan\Pictures\Screenshots)
+![Screenshot](assets/screenshot.png)
 
 ## Installation & Setup
 To run the **Energy Forecasting System** locally, follow these steps:
