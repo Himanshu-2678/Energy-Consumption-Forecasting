@@ -33,8 +33,8 @@ This is my first Machine Learning project created from scratch, aimed at upskill
 
 ## 🎥 Project Demo Video
 
+Link: https://github.com/user-attachments/assets/e550e25d-3015-4995-8eb1-f125f026b9a8)](https://youtu.be/R5jzMevVJxo
 
-[Watch the demo video](https://github.com/Himanshu-2678/Energy-Consumption-Forecasting/outputs/Screen%20Recording%202025-08-03%20134840.mp4)
 
 
 
