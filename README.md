@@ -28,9 +28,9 @@ This is my first Machine Learning project created from scratch, aimed at upskill
   - `numpy` (for numerical computations)
 )
 
-## Image for demo of the Project
+## demo of the Project
 ![Energy Forecasting System](outputs/Screenshot%202025-08-03%20003452.png)
-
+[Watch the video](https://github.com/Himanshu-2678/Energy-Consumption-Forecasting/outputs/Screen%20Recording%202025-08-03%20134840.mp4?raw=true)
 ## Installation & Setup
 To run the **Energy Forecasting System** locally, follow these steps:
 
