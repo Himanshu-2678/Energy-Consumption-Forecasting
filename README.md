@@ -28,7 +28,6 @@ This is my first Machine Learning project created from scratch, aimed at upskill
   - `numpy` (for numerical computations)
 )
 
-## demo of the Project
 ![Energy Forecasting System](outputs/Screenshot%202025-08-03%20003452.png)
 
 ## 🎥 Project Demo Video
