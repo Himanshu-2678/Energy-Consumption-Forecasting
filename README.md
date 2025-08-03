@@ -32,10 +32,18 @@ This is my first Machine Learning project created from scratch, aimed at upskill
 To run the **Energy Forecasting System** locally, follow these steps:
 
 1. **Clone the repository**:
+   First, clone the repository to your local machine using the following command:
    ```bash
-   git clone https://github.com/yourusername/Energy_Forecasting_System.git
-   cd Energy_Forecasting_System
-3. Run the app -> 
+   git clone https://github.com/Himanshu-2678/Energy-Consumption-Forecasting.git
+   cd Energy-Consumption-Forecasting
+   
+2. Install required libraries 
+   ```bash
+   pip install -r requirements.txt
+
+4. Run the app -> 
    ```bash
    python src/7-app.py
-   
+
+
+Feel free to open an issue or contact me directly if you have any questions or suggestions!
