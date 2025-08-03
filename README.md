@@ -29,7 +29,7 @@ This is my first Machine Learning project created from scratch, aimed at upskill
 )
 
 ## Image for demo of the Project
-![Energy Forecasting System](assets/Screenshot%202025-08-03%20003452.png)
+![Energy Forecasting System](outputs/Screenshot%202025-08-03%20003452.png)
 
 ## Installation & Setup
 To run the **Energy Forecasting System** locally, follow these steps:
