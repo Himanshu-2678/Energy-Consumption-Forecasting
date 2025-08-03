@@ -4,19 +4,39 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import warnings
+
 warnings.filterwarnings("ignore")
 
 # Loading the trained XGBoost model
-model = joblib.load(os.path.join("outputs", "xgb_model.pkl"))
+model = joblib.load(r'C:\Users\himan\Desktop\Projects\Energy_Forecasting_System\outputs\xgb_model.pkl')
+
+# Loading cleaned data
+df = pd.read_parquet(r'C:\Users\himan\Desktop\Projects\Energy_Forecasting_System\data\processed-data\est_hourly_cleaned_with_features.parquet')
+
+# Calculating the average energy consumption per year
+yearly_avg = df.groupby('year')['PJME_MW'].mean()
+
+# Function to plot average energy consumption per year
+def plot_avg_energy_per_year():
+    plt.figure(figsize=(10, 6))
+    yearly_avg.plot(kind='bar', color='tab:blue')
+    plt.title('Average Energy Consumption Per Year')
+    plt.xlabel('Year')
+    plt.ylabel('Average Energy Consumption (MW)')
+    plt.xticks(rotation=45)
+    plt.grid(True)
+    plt.tight_layout()
+    # Save the figure to return
+    return plt
 
 # Defining the prediction function
 def predict_energy(region, hour, dayofweek, quarter, month, year,
                    dayofyear, dayofmonth, weekofyear, is_holiday):
 
     PJME_MW = 0  
-    
+
     if region == "PJME":
-        PJME_MW = 1000 
+        PJME_MW = 1000  # Placeholder value based on the region
     
     # input data
     input_df = pd.DataFrame({
@@ -52,18 +72,20 @@ def predict_energy(region, hour, dayofweek, quarter, month, year,
     
     forecast = model.predict(forecast_input)
 
-    # Ploting the forecast
-    fig, ax = plt.subplots()
-    ax.plot(hours, forecast, marker='o')
-    ax.set_title(f"24-Hour Forecast: {region}")
-    ax.set_xlabel("Hour")
-    ax.set_ylabel("Energy (MW)")
-    ax.grid(True)
+    # Plotting the forecast 
+    fig1, ax1 = plt.subplots(figsize=(8, 4))
+    ax1.plot(hours, forecast, marker='o', color='tab:blue')
+    ax1.set_title(f"24-Hour Forecast: {region}")
+    ax1.set_xlabel("Hour")
+    ax1.set_ylabel("Energy (MW)")
+    ax1.grid(True)
 
-    return round(prediction, 2), fig
+    # Plotting the yearly average energy consumption (this stays static unless data changes)
+    fig2 = plot_avg_energy_per_year()
+
+    return round(prediction, 2), fig1, fig2  
 
 inputs = [
-    #gr.Radio(["PJME"], label="Region"),
     gr.Slider(0, 23, step=1, label="Hour"),
     gr.Slider(0, 6, step=1, label="Day of Week (0=Mon)"),
     gr.Slider(1, 4, step=1, label="Quarter"),
@@ -79,11 +101,13 @@ inputs = [
 iface = gr.Interface(
     fn=predict_energy,
     inputs=inputs,
-    outputs=["number", "plot"],
+    outputs=[gr.Number(), gr.Plot(), gr.Plot()],  
     title="⚡ Energy Consumption Forecasting System",
-    description="Here we are going to see the Energy Consumption Forecasting for specific regions within the PJM Interconnection (PJM) system. PJM Interconnection is a regional transmission organization (RTO) in the United States that coordinates the movement of wholesale electricity and ensures grid reliability.",
-    theme="huggingface",     
-    live=True,            
-    allow_flagging="never")
+    description="Energy consumption forecasting for the PJM Interconnection system using XGBoost.",
+    theme="huggingface",  
+    live=True,  
+    allow_flagging="never",  
+)
 
-iface.launch()
+# Launch the interface
+iface.launch(share=True, server_name="127.0.0.1", server_port=7860)
